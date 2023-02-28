@@ -38,8 +38,11 @@ class UsageView(APIView):
         try:
             if year & month != "":
                 find_column = csv.loc[(csv["year"] == year) & (csv["month"] == month)]
-                return HttpResponse(
-                    "바탕화면에 필터된 CSV 파일 저장 완료되었습니다.", find_column.to_csv(path)
-                )
+                return HttpResponse("바탕화면에 필터된 CSV 파일 저장 완료되었습니다.", find_column.to_csv(path))
         except:
             return HttpResponse("올바른 year, month를 입력해 주세요.")
+
+
+class BillView(APIView):
+    def post(self, request):
+        pass
