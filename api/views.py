@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from django.http import HttpResponse
-import requests, zipfile, io, os, shutil, math
+import requests, zipfile, io, os, shutil
 import pandas as pd
 
 
@@ -18,10 +18,7 @@ class UsageView(APIView):
         url_zip = url.replace(".zip", "")
         url_filename = url_zip.split("/")[-1]
 
-        csv = pd.read_csv(
-            url_filename,
-            encoding="utf-8",
-        )
+        csv = pd.read_csv(url_filename, encoding="utf-8")
 
         os.remove(url_filename)
         shutil.rmtree("__MACOSX")
@@ -60,10 +57,7 @@ class BillView(APIView):
         url_zip = url.replace(".zip", "")
         url_filename = url_zip.split("/")[-1]
 
-        csv = pd.read_csv(
-            url_filename,
-            encoding="utf-8",
-        )
+        csv = pd.read_csv(url_filename, encoding="utf-8")
 
         os.remove(url_filename)
         shutil.rmtree("__MACOSX")
