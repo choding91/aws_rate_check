@@ -7,7 +7,6 @@
 .gitmessage.txt
 0*_*.py
 backup
-__MACOSX
 
 ### Django ###
 *.log
