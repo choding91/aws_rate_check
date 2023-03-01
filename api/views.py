@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from django.http import HttpResponse
-import requests, zipfile, io, os, shutil
+import requests, zipfile, io, os, shutil, math
 import pandas as pd
 
 
@@ -82,10 +82,10 @@ class BillView(APIView):
         except:
             return HttpResponse("올바른 id, year, month를 입력해 주세요.")
 
-        cost_krw = find_column["exchangeRate"].mul(find_column["Cost"])
-        find_column["cost_krw"] = cost_krw.sum()
+        find_column["exchange_rate"] = round((find_column["exchangeRate"].mean()), 8)
         find_column["cost"] = find_column["Cost"].sum()
-        find_column["exchange_rate"] = find_column["exchangeRate"].mean()
+        cost_krw = find_column["exchangeRate"].mul(find_column["Cost"])
+        find_column["cost_krw"] = float("{:.1f}".format(cost_krw.sum()))
 
         check = find_column[["exchange_rate", "cost", "cost_krw"]]
         result = check.iloc[0]
